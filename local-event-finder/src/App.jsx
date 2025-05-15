@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchForm from "./components/searchForm";
-import eventList from "./components/eventList":
+import EventList from "./components/eventlist";
 import { fetchEventbriteEvents } from "./services/eventbrite";
 import { fetchTicketmasterEvents } from "./services/ticketmaster";
 

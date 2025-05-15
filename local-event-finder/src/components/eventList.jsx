@@ -1,4 +1,4 @@
-export default function eventList({ events }) {
+export default function EventList({ events }) {
   return (
     <div className="event-list">
       {" "}
