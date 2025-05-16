@@ -1,4 +1,4 @@
-// src/components/EventsList.jsx
+
 import React, { useEffect, useState } from "react";
 import { fetchTicketmasterEvents } from "/services/ticketmaster";
 

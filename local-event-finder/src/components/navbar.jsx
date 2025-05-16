@@ -7,9 +7,9 @@ export default function NavBar() {
     <nav
       style={{
         display: "flex",
-        padding: 16,
-        background: "#4a90e2",
-        color: "#fff",
+        padding: 20,
+        background: "#430000",
+        color: "white",
         alignItems: "center",
         justifyContent: "space-between",
       }}
@@ -24,6 +24,9 @@ export default function NavBar() {
         </Link>
         <Link to="/favorites" style={{ color: "#fff", textDecoration: "none" }}>
           Favorites
+        </Link>
+        <Link to="/stats" style={{ color: "#fff", textDecoration: "none" }}>
+          Stats
         </Link>
       </div>
     </nav>

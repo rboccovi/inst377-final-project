@@ -1,8 +1,8 @@
-// src/components/FavoritesList.jsx
+
 import React, { useEffect, useState } from "react";
 
 export default function FavoritesList() {
-  const [favorites, setFavorites] = useState([]); // ← make sure this line exists!
+  const [favorites, setFavorites] = useState([]); 
   const [error, setError] = useState(null);
 
   useEffect(() => {

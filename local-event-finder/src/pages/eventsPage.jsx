@@ -66,7 +66,7 @@ export default function EventsPage() {
     }
   };
 
-  // 4️⃣ Helper to check if this event is already saved
+  // Helper to check if this event is already saved
   const isFavorited = (id) => favorites.some((f) => f.event_id === id);
 
   return (
