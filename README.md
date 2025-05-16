@@ -59,14 +59,32 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
 
 
+## 3. Running Locally
+Development (React + Vite HMR + API emulation):
+
+bash
+Copy
+Edit
+npx vercel dev
+App: http://localhost:3000
+
+API: http://localhost:3000/api/events, /api/favorites
+
+Production Preview (build & serve):
+
+bash
+Copy
+Edit
+npm run build
+npm run preview
 
 
 
-## 5. API Reference
+## 4. API Reference
 All routes live under api/ and are exposed at /api/*.
 
-# 5.1 GET /api/events
-Proxy to Ticketmaster.
+#  GET /api/events
+this is Proxy to Ticketmaster.
 
 Query
 
@@ -107,7 +125,7 @@ Edit
 ]
 500 Internal Server Error on DB error
 
-5.3 POST /api/favorites
+#  POST /api/favorites
 Save a new favorite.
 
 Request Body (JSON):
@@ -128,17 +146,17 @@ Response
 
 500 Internal Server Error on DB error
 
-6. Known Bugs & Caveats
+# 6. Known Bugs & Caveats
 SPA deep-links (e.g. /events) require a catch-all rewrite in vercel.json or Vercel Routes.
 
 No automated tests—manual only.
 
 Single-user demo; no authentication or multi-user support.
 
-7. Roadmap
+***7. Roadmap*** 
 Authentication via Supabase Auth (per-user favorites)
 
-Testing: add Jest & React Testing Library coverage
+T
 
 Pagination for Ticketmaster results
 
@@ -146,7 +164,7 @@ Map View with Mapbox/Google Maps
 
 Mobile UX optimizations for iOS/Android
 
-Error Reporting & Sentry integration
+
 
 Thank you for picking up Local Event Finder! Happy coding. 🎉
 
