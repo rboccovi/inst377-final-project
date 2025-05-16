@@ -174,3 +174,15 @@ a:hover::after {
   margin: 0 auto;
   padding: var(--space-lg);
 }
+/* Highlighted “Liked” button */
+.btn-liked {
+  background-color: var(--accent-hot); /* e.g. the hot pink neon */
+  border-color: var(--accent-hot);
+  color: #fff;
+  box-shadow: 0 0 8px var(--accent-hot);
+}
+
+.btn-liked:hover {
+  /* a slightly stronger glow on hover */
+  box-shadow: 0 0 12px var(--accent-hot);
+}
