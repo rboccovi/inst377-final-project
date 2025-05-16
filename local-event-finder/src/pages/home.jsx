@@ -1,7 +1,7 @@
 // src/pages/HomePage.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FeaturedSlider from "../components/FeaturedSlider";
+import FeaturedSlider from "../components/featuredSlider";
 import { fetchTicketmasterEvents } from "../services/ticketmaster";
 
 export default function HomePage() {
