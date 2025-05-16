@@ -10,12 +10,9 @@ export default function EventsPage() {
   const [loadingEvents, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [saving, setSaving] = useState(false);
 
   // 1️⃣ Load existing favorites on mount
-  useEffect(() => {
-    fetchFavorites();
-  }, []);
-
   const fetchFavorites = async () => {
     try {
       const res = await fetch("/api/favorites");
@@ -26,6 +23,10 @@ export default function EventsPage() {
       console.error("Failed to load favorites:", err);
     }
   };
+
+  useEffect(() => {
+    fetchFavorites();
+  }, []);
 
   // 2️⃣ Search handler
   const handleSearch = async (e) => {
@@ -48,8 +49,9 @@ export default function EventsPage() {
 
   // 3️⃣ Favorite handler
   const handleFavorite = async (evt) => {
+    setSaving(true);
     const payload = {
-      user_id: "00000000-0000-0000-0000-000000000000", // replace with real user ID
+      user_id: "00000000-0000-0000-0000-000000000000", // your real user ID here
       event_id: evt.id,
       name: evt.name,
       date: evt.dates.start.dateTime,
@@ -64,15 +66,16 @@ export default function EventsPage() {
       });
 
       if (!res.ok) {
-        // if the server returned an error, throw its message
         throw new Error(await res.text());
       }
 
-      // Re-fetch the full favorites list so the button state updates
+      // reload favorites so UI updates
       await fetchFavorites();
     } catch (err) {
       console.error("Could not save favorite:", err);
       alert("Could not save favorite: " + err.message);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -134,10 +137,14 @@ export default function EventsPage() {
                 </a>
                 <button
                   onClick={() => handleFavorite(evt)}
-                  disabled={isFavorited(evt.id)}
+                  disabled={isFavorited(evt.id) || saving}
                   className="btn btn-primary"
                 >
-                  {isFavorited(evt.id) ? "❤️ Liked" : "🤍 Like"}
+                  {isFavorited(evt.id)
+                    ? "❤️ Liked"
+                    : saving
+                    ? "Saving…"
+                    : "🤍 Like"}
                 </button>
               </div>
             </div>

@@ -21,29 +21,22 @@ export default async function handler(req, res) {
   }
 
   // POST /api/favorites
-  else if (req.method === "POST") {
+  if (req.method === "POST") {
     try {
-      // Insert the new row and ask Supabase to return it
       const { data, error } = await supabase
         .from("favorites")
         .insert([req.body], { returning: "representation" });
-
       if (error) throw error;
-      if (!data || !data[0]) {
-        throw new Error("No data returned after insert");
-      }
 
-      // Respond with the inserted favorite
-      return res.status(201).json(data[0]);
+      // Always return JSON (the inserted row)
+      return res.status(201).json(data[0] || {});
     } catch (err) {
       console.error("❌ POST /api/favorites error:", err.message);
       return res.status(500).json({ error: err.message });
     }
   }
 
-  // Anything else is not allowed
-  else {
-    res.setHeader("Allow", ["GET", "POST"]);
-    return res.status(405).end("Method Not Allowed");
-  }
+  // Method not allowed
+  res.setHeader("Allow", ["GET", "POST"]);
+  return res.status(405).end("Method Not Allowed");
 }
