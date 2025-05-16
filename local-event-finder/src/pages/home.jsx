@@ -112,6 +112,7 @@ export default function HomePage() {
         )}
       </section>
 
+
       {/* Find Events button */}
       <button onClick={() => navigate("/events")} className="btn btn-primary">
         Find Events in {city}
