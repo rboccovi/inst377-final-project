@@ -76,10 +76,10 @@ npm run preview
 
 
 
-## 4. API Reference
+# 4. API Reference
 All routes live under api/ and are exposed at /api/*.
 
-#  GET /api/events
+##  GET /api/events
 this is Proxy to Ticketmaster.
 
 Query
@@ -98,7 +98,7 @@ Response
 
 502 Bad Gateway on upstream failure
 
-# GET /api/favorites
+## GET /api/favorites
 Fetch all saved favorites.
 
 Response
@@ -121,7 +121,7 @@ Edit
 ]
 500 Internal Server Error on DB error
 
-#  POST /api/favorites
+##  POST /api/favorites
 Save a new favorite.
 
 Request Body (JSON):
