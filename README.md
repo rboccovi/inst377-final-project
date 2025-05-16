@@ -98,7 +98,7 @@ Response
 
 502 Bad Gateway on upstream failure
 
-5.2 GET /api/favorites
+# GET /api/favorites
 Fetch all saved favorites.
 
 Response
