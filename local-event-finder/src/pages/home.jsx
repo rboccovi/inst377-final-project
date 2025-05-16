@@ -1,7 +1,7 @@
 // src/pages/HomePage.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FeaturedSlider from "../components/featuredSlider";
+import FeaturedSlider from "../components/FeaturedSlider";
 import { fetchTicketmasterEvents } from "../services/ticketmaster";
 
 export default function HomePage() {
@@ -13,14 +13,14 @@ export default function HomePage() {
   const [loadingAttractions, setLoadingAttractions] = useState(false);
   const [attrError, setAttrError] = useState(false);
 
-  // whenever city changes, I should reload both events and attractions
+  // whenever `city` changes, reload both events and attractions
   useEffect(() => {
-    // Fetch featured events
+    // 1️⃣ Fetch featured events
     fetchTicketmasterEvents({ city, radius: 50, unit: "km" })
       .then(setFeaturedEvents)
       .catch(console.error);
 
-    // Geocode the city to lat/lon
+    // 2️⃣ Geocode the city to lat/lon
     setLoadingAttractions(true);
     setAttrError(false);
 
@@ -111,7 +111,6 @@ export default function HomePage() {
           <p>No attractions found.</p>
         )}
       </section>
-
 
       {/* Find Events button */}
       <button onClick={() => navigate("/events")} className="btn btn-primary">
