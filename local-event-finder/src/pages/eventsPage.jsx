@@ -11,7 +11,7 @@ export default function EventsPage() {
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
 
-  // Load existing favorites on mount
+  // 1️⃣ Load existing favorites on mount
   useEffect(() => {
     fetchFavorites();
   }, []);
@@ -27,7 +27,7 @@ export default function EventsPage() {
     }
   };
 
-  // Search handler
+  // 2️⃣ Search handler
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -46,7 +46,7 @@ export default function EventsPage() {
     }
   };
 
-  // Favorite handler
+  // 3️⃣ Favorite handler
   const handleFavorite = async (evt) => {
     const payload = {
       user_id: "00000000-0000-0000-0000-000000000000", // replace with real user ID
@@ -62,9 +62,13 @@ export default function EventsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error(await res.text());
 
-      // Re-fetch the full favorites list to update state
+      if (!res.ok) {
+        // if the server returned an error, throw its message
+        throw new Error(await res.text());
+      }
+
+      // Re-fetch the full favorites list so the button state updates
       await fetchFavorites();
     } catch (err) {
       console.error("Could not save favorite:", err);
@@ -72,7 +76,7 @@ export default function EventsPage() {
     }
   };
 
-  // Helper to check if an event is already favorited
+  // 4️⃣ Helper to check if an event is already a favorite
   const isFavorited = (id) => favorites.some((fav) => fav.event_id === id);
 
   return (
