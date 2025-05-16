@@ -35,5 +35,126 @@ This document guides future developers through installing, running, testing, and
     url       text             not null
   );
   ```
+- A Ticketmaster API key
+
+- A Vercel account (for deployment)
+
+- ## 2.  Installation
+Clone this repo and enter the front-end directory:
+
+bash
+Copy
+Edit
+git clone https://github.com/your-org/inst377-final-project.git
+cd inst377-final-project/local-event-finder
+Environment
+Create a .env (do not commit) with:
+
+bash
+Copy
+Edit
+VITE_TICKETMASTER_API_KEY=your_ticketmaster_key
+SUPABASE_URL=https://<your-project-ref>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+
+
+
+
+
+## 5. API Reference
+All routes live under api/ and are exposed at /api/*.
+
+# 5.1 GET /api/events
+Proxy to Ticketmaster.
+
+Query
+
+city (string, default "Boston")
+
+radius (number, default 10)
+
+unit ("km" or "miles", default "km")
+
+countryCode (ISO, default "US")
+
+Response
+
+200 OK & JSON array of event objects
+
+502 Bad Gateway on upstream failure
+
+5.2 GET /api/favorites
+Fetch all saved favorites.
+
+Response
+
+200 OK & JSON array of:
+
+json
+Copy
+Edit
+[
+  {
+    "id": "uuid",
+    "user_id": "uuid",
+    "event_id": "string",
+    "name": "string",
+    "date": "ISO timestamp",
+    "url": "string"
+  },
+  …
+]
+500 Internal Server Error on DB error
+
+5.3 POST /api/favorites
+Save a new favorite.
+
+Request Body (JSON):
+
+json
+Copy
+Edit
+{
+  "user_id": "uuid",
+  "event_id": "string",
+  "name": "string",
+  "date": "ISO timestamp",
+  "url": "string"
+}
+Response
+
+201 Created & the inserted row as JSON
+
+500 Internal Server Error on DB error
+
+6. Known Bugs & Caveats
+SPA deep-links (e.g. /events) require a catch-all rewrite in vercel.json or Vercel Routes.
+
+No automated tests—manual only.
+
+Single-user demo; no authentication or multi-user support.
+
+7. Roadmap
+Authentication via Supabase Auth (per-user favorites)
+
+Testing: add Jest & React Testing Library coverage
+
+Pagination for Ticketmaster results
+
+Map View with Mapbox/Google Maps
+
+Mobile UX optimizations for iOS/Android
+
+Error Reporting & Sentry integration
+
+Thank you for picking up Local Event Finder! Happy coding. 🎉
+
+
+
+
+
+
+
 
 
