@@ -1,12 +1,37 @@
-# React + Vite
+# Local Event Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Vite-powered React single-page app (SPA) for discovering events in any city, saving favorites to a Supabase backend, and viewing stats and local attractions. Users can:
 
-Currently, two official plugins are available:
+- 🔍 Search Ticketmaster events by city, radius, and unit
+- ❤️ “Like” events to save them in a Supabase `favorites` table
+- 📊 View event-by-weekday charts under “Insights”
+- 🗺️ Discover nearby attractions via Wikipedia Geosearch
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Target Browsers**  
+Designed for modern desktop browsers (Chrome, Firefox, Edge, Safari) and mobile WebKit (iOS Safari, Android Chrome).
 
-## Expanding the ESLint configuration
+**Developer Manual**  
+For setup, architecture, API docs, tests, and roadmap, see [docs/Developer_Manual.md](docs/Developer_Manual.md).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Developer Manual
+
+This document guides future developers through installing, running, testing, and extending **Local Event Finder**.
+
+---
+
+## 1. Prerequisites Needs
+
+- Node.js ≥ 18.x
+- npm ≥ 8.x
+- A Supabase project with a `favorites` table:
+
+  ```sql
+  create table favorites (
+    id        uuid             primary key default uuid_generate_v4(),
+    user_id   uuid             not null,
+    event_id  text             not null,
+    name      text             not null,
+    date      timestamptz      not null,
+    url       text             not null
+  );
+  ```
