@@ -7,6 +7,8 @@ import { fetchTicketmasterEvents } from "../services/ticketmaster";
 export default function HomePage() {
   const navigate = useNavigate();
 
+  
+
   const [city, setCity] = useState("Boston");
   const [featuredEvents, setFeaturedEvents] = useState([]);
   const [attractions, setAttractions] = useState([]);
@@ -113,7 +115,8 @@ export default function HomePage() {
       </section>
 
       {/* Find Events button */}
-      <button onClick={() => navigate("/events")} className="btn btn-primary">
+      <button onClick={() => navigate("/events")}
+       className="btn btn-primary">
         Find Events in {city}
       </button>
 

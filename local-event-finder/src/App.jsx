@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/events" element={<EventsPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/stats" element={<ChartPage />} />
+       <Route path="*" element={<HomePage />} /> 
       </Routes>
     </BrowserRouter>
   );
