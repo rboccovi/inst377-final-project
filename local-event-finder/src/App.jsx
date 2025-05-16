@@ -2,10 +2,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar.jsx";
-import HomePage from "./pages/HomePage.jsx";
+import HomePage from "./pages/home.jsx";
 import EventsPage from "./pages/EventsPage.jsx";
 import FavoritesPage from "./pages/FavoritesPage.jsx";
-import ChartPage from "./pages/ChartPage.jsx";
+import ChartPage from "./pages/ChartsPage.jsx";
 
 export default function App() {
   return (
