@@ -150,11 +150,7 @@ No automated tests—manual only.
 Single-user demo; no authentication or multi-user support.
 
 ***7. Roadmap*** 
-Authentication via Supabase Auth (per-user favorites)
-
-T
-
-Pagination for Ticketmaster results
+Authentication via Supabase Auth
 
 Map View with Mapbox/Google Maps
 
