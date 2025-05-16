@@ -149,7 +149,7 @@ No automated tests—manual only.
 
 Single-user demo; no authentication or multi-user support.
 
-*** Roadmap*** 
+# Roadmap
 Authentication via Supabase Auth
 
 Map View with Mapbox/Google Maps
