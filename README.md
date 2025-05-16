@@ -1,23 +1,19 @@
 # Local Event Finder
 
-A Vite-powered React single-page app (SPA) for discovering events in any city, saving favorites to a Supabase backend, and viewing stats and local attractions. Users can:
+A Vite-powered React single-page app for discovering events in any city, saving favorites to a Supabase backend, and viewing stats and local attractions. Users can:
 
 - 🔍 Search Ticketmaster events by city, radius, and unit
 - ❤️ “Like” events to save them in a Supabase `favorites` table
-- 📊 View event-by-weekday charts under “Insights”
+- 📊 View event count-by-weekday charts under “Insights”
 - 🗺️ Discover nearby attractions via Wikipedia Geosearch
 
 **Target Browsers**  
 Designed for modern desktop browsers (Chrome, Firefox, Edge, Safari) and mobile WebKit (iOS Safari, Android Chrome).
 
-**Developer Manual**  
-For setup, architecture, API docs, tests, and roadmap, see [docs/Developer_Manual.md](docs/Developer_Manual.md).
-
 # Developer Manual
 
 This document guides future developers through installing, running, testing, and extending **Local Event Finder**.
 
----
 
 ## 1. Prerequisites Needs
 
