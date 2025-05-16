@@ -1,13 +1,14 @@
 // api/favorites.js
 import { createClient } from "@supabase/supabase-js";
 
-// Initialize Supabase client
+// Initialize Supabase client with service‐role key
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 export default async function handler(req, res) {
+  // GET /api/favorites
   if (req.method === "GET") {
     try {
       const { data, error } = await supabase.from("favorites").select("*");
@@ -17,16 +18,31 @@ export default async function handler(req, res) {
       console.error("❌ GET /api/favorites error:", err.message);
       return res.status(500).json({ error: err.message });
     }
-  } else if (req.method === "POST") {
+  }
+
+  // POST /api/favorites
+  else if (req.method === "POST") {
     try {
-      const { error } = await supabase.from("favorites").insert([req.body]);
+      // Insert the new row and ask Supabase to return it
+      const { data, error } = await supabase
+        .from("favorites")
+        .insert([req.body], { returning: "representation" });
+
       if (error) throw error;
-      return res.status(201).end();
+      if (!data || !data[0]) {
+        throw new Error("No data returned after insert");
+      }
+
+      // Respond with the inserted favorite
+      return res.status(201).json(data[0]);
     } catch (err) {
       console.error("❌ POST /api/favorites error:", err.message);
       return res.status(500).json({ error: err.message });
     }
-  } else {
+  }
+
+  // Anything else is not allowed
+  else {
     res.setHeader("Allow", ["GET", "POST"]);
     return res.status(405).end("Method Not Allowed");
   }

@@ -7,22 +7,27 @@ export default function EventsPage() {
   const [radius, setRadius] = useState("10");
   const [unit, setUnit] = useState("km");
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingEvents, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
 
-  // 1️⃣ Load existing favorites so we can disable buttons
+  // Load existing favorites on mount
   useEffect(() => {
-    fetch("/api/favorites")
-      .then((res) => {
-        if (!res.ok) throw new Error(res.statusText);
-        return res.json();
-      })
-      .then((data) => setFavorites(data))
-      .catch((err) => console.error("Failed to load favorites:", err));
+    fetchFavorites();
   }, []);
 
-  // 2️⃣ Search handler
+  const fetchFavorites = async () => {
+    try {
+      const res = await fetch("/api/favorites");
+      if (!res.ok) throw new Error(res.statusText);
+      const data = await res.json();
+      setFavorites(data);
+    } catch (err) {
+      console.error("Failed to load favorites:", err);
+    }
+  };
+
+  // Search handler
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -41,10 +46,10 @@ export default function EventsPage() {
     }
   };
 
-  // 3️⃣ Favorite handler
+  // Favorite handler
   const handleFavorite = async (evt) => {
     const payload = {
-      user_id: "00000000-0000-0000-0000-000000000000", // replace with your user ID
+      user_id: "00000000-0000-0000-0000-000000000000", // replace with real user ID
       event_id: evt.id,
       name: evt.name,
       date: evt.dates.start.dateTime,
@@ -58,16 +63,17 @@ export default function EventsPage() {
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error(await res.text());
-      const saved = await res.json();
-      setFavorites((f) => [...f, saved]);
+
+      // Re-fetch the full favorites list to update state
+      await fetchFavorites();
     } catch (err) {
       console.error("Could not save favorite:", err);
       alert("Could not save favorite: " + err.message);
     }
   };
 
-  // Helper to check if this event is already saved
-  const isFavorited = (id) => favorites.some((f) => f.event_id === id);
+  // Helper to check if an event is already favorited
+  const isFavorited = (id) => favorites.some((fav) => fav.event_id === id);
 
   return (
     <div className="container">
@@ -96,14 +102,14 @@ export default function EventsPage() {
           <option value="km">km</option>
           <option value="miles">miles</option>
         </select>
-        <button className="btn btn-primary" disabled={loading}>
-          {loading ? "Searching…" : "Search"}
+        <button className="btn btn-primary" disabled={loadingEvents}>
+          {loadingEvents ? "Searching…" : "Search"}
         </button>
       </form>
 
       {error && <p className="error-text">Error: {error}</p>}
 
-      {!loading && events.length === 0 && !error && (
+      {!loadingEvents && events.length === 0 && !error && (
         <p>No events found. Try a search above.</p>
       )}
 
