@@ -1,31 +1,21 @@
-import { useState } from "react";
-import SearchForm from "./components/searchForm";
-import EventList from "./components/eventlist";
-import { fetchEventbriteEvents } from "./services/eventbrite";
-import { fetchTicketmasterEvents } from "./services/ticketmaster";
+// src/App.jsx
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [events, setEvents] = useState([]);
+import NavBar from "./components/navbar";
+import HomePage from "./pages/home";
+import EventsPage from "./pages/eventsPage.jsx";
+import FavoritesPage from "./pages/favoritesPage.jsx";
 
-  const handleSearch = async ({ location, keyword, date }) => {
-    try {
-      const [ebEvents, tmEvents] = await Promise.all([
-        fetchEventbriteEvents(location, keyword, date),
-        fetchTicketmasterEvents(location, keyword, date),
-      ]);
-      const combinedEvents = [...ebEvents, ...tmEvents];
-      setEvents(combinedEvents);
-    } catch (err) {
-      console.error("Search error:", err);
-      s;
-    }
-  };
+export default function App() {
   return (
-    <div className="App">
-      <h1>Local Event Finder</h1> <SearchForm onSearch={handleSearch} />{" "}
-      <EventList events={events} />{" "}
-    </div>
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

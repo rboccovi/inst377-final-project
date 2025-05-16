@@ -11,7 +11,7 @@ export const fetchEventbriteEvents = async (location, keyword, date) => {
     },
   };
   const response = await axios.get(
-    "https://www.eventbriteapi.com/v3/events/search/",
+    "https://www.eventbriteapi.com/v3/venues/:venue_id/events/",
     config
   );
   return response.data.events;
