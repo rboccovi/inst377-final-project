@@ -15,7 +15,7 @@ Designed for modern desktop browsers (Chrome, Firefox, Edge, Safari) and mobile 
 This document guides future developers through installing, running, testing, and extending **Local Event Finder**.
 
 
-## 1. Prerequisites Needs
+##  Prerequisites Needs
 
 - Node.js ≥ 18.x
 - npm ≥ 8.x
@@ -35,7 +35,7 @@ This document guides future developers through installing, running, testing, and
 
 - A Vercel account (for deployment)
 
-- ## 2.  Installation
+- ##  Installation
 Clone this repo and enter the front-end directory:
 
 bash
@@ -55,7 +55,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
 
 
-## 3. Running Locally
+## Running Locally
 Development (React + Vite HMR + API emulation):
 
 bash
@@ -76,7 +76,7 @@ npm run preview
 
 
 
-# 4. API Reference
+# API Reference
 All routes live under api/ and are exposed at /api/*.
 
 ##  GET /api/events
@@ -142,14 +142,14 @@ Response
 
 500 Internal Server Error on DB error
 
-# 6. Known Bugs & Caveats
+#  Known Bugs & Caveats
 SPA deep-links (e.g. /events) require a catch-all rewrite in vercel.json or Vercel Routes.
 
 No automated tests—manual only.
 
 Single-user demo; no authentication or multi-user support.
 
-***7. Roadmap*** 
+*** Roadmap*** 
 Authentication via Supabase Auth
 
 Map View with Mapbox/Google Maps
