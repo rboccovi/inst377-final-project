@@ -1,4 +1,7 @@
 # Local Event Finder
+ Vercel link
+ 
+https://vercel.com/robertas-projects-b8e43c42/local-event-finder-final/8vNSo52SNuKg88uTgxu7rQMKFkV1
 
 A Vite-powered React single-page app for discovering events in any city, saving favorites to a Supabase backend, and viewing stats and local attractions. Users can:
 
